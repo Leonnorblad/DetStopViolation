@@ -1,0 +1,6 @@
+opencv-python==4.8.0.76
+Supervision==0.22.0
+inference==0.15.1
+tqdm==4.66.4
+roboflow==1.1.34
+
