@@ -473,7 +473,7 @@ class StopVideo:
     
     def is_vehicle(self, detections):
         """ Filters detections to only include vehicles"""
-        vehicle_class_ids = [2, 3, 5, 6, 7]
+        vehicle_class_ids = [2, 3, 5, 7] # ["car", "motorcycle", "bus", "truck"]
         return [True if x in vehicle_class_ids else False for x in detections.class_id]
         
     def return_target(self, detections):

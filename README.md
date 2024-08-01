@@ -52,12 +52,17 @@ To avoid filming individuals running stop signs and lacking access to advanced c
 
 ## 🧩 The solution
 
+### **Vehicle detection**
+YOLOv8 is used to detect vehicles within each frame. The model processes the input and provides positional detections. Only the detections corresponding to motor-driven road vehicles: *car, motorcycle, bus, truck* are retained.
+
 ### **Road-Zone filtering**
 Only vehicles that are detected within the designated road-zone, where the stop sign is located, are considered. This is achieved by applying a filter that requires the center bottom point of the vehicle to be within the boundary of the road-zone.
+
 <img src="readme_files/road.png" width="500"/>
 
 ### **Closest-to-line filtering**
 To identify which vehicle is closest to the white line, a reference point is used. Only the vehicle with the shortest distance to this point is considered. The reference point is strategically placed near the center of the white line, ensuring accurate measurement of proximity.
+
 <img src="readme_files/point.png" width="500"/>
 
 ### **Front wheel detection**
@@ -98,7 +103,9 @@ To determine whether a vehicle has stopped correctly at the stop sign, the detec
 Note that all vehicles evaluated for these criteria meet the initial requirements of being on the road where the stop sign is located and being the vehicle closest to the white line.
 
 ## ✨ Putting it all together!
+
 <img src="readme_files/running_stop.gif" width="600"/>
+
 <img src="readme_files/stopping.gif" width="600"/>
 
 
