@@ -12,7 +12,7 @@ git clone https://github.com/Leonnorblad/DetStopViolation
 cd DetStopViolation
 ```
 
-2. Create virtual environment with python 3.11.9 eg. conda (and install pip).
+2. Create virtual environment with python 3.11.9 e.g. conda (and install pip).
 ```bash
 conda create --name DetStopViolation python==3.11.9
 conda activate DetStopViolation
@@ -85,7 +85,7 @@ To detect when a vehicle has failed to stop properly, an *outzone* is used. Simi
 <img src="readme_files/outzone.png" width="500"/>
 
 ### **Vehicle movement**
-The vehicle moment is monitored as the difference in pixels of the vehicle center between consecutive frames. Due to the inherent noise in detection, the center location may vary slightly. This is mitigated by setting a threshold for stopping: a movement of less than 15 pixels per second. This approach is simpler than calculating actual speed (like [link](https://blog.roboflow.com/estimate-speed-computer-vision/)) and is effective for this purpose. The speeds of vehicles with a front wheel in the stopzone can be plotted as:
+The vehicle moment is monitored as the difference in pixels of the vehicle center between consecutive frames. Due to the inherent noise in detection, the center location may vary slightly. This is mitigated by setting a threshold for stopping: a movement of less than 15 pixels per second. This approach is simpler than calculating actual speed (like [this](https://blog.roboflow.com/estimate-speed-computer-vision/)). The speeds of vehicles with a front wheel in the stopzone can be plotted as:
 
 <img src="readme_files/speed_plot.png" width="500"/>
 
@@ -108,9 +108,25 @@ Note that all vehicles evaluated for these criteria meet the initial requirement
 
 <img src="readme_files/stopping.gif" width="600"/>
 
+## 🛑 Method Limitations
+
+### Failed to Stop
+The first wheel to enter the *outzone* after being in the *stopzone* is identified as the front wheel. This wheel is used as the trigger for the "failed to stop" label. This approach aims to be robust against false positive wheel detections.
+
+| False Positives                                                                                               | False Negatives                                                                                       |
+|---------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| The first wheel to enter the *outzone* after being in the *stopzone* is identified as the front wheel. This wheel is used as the trigger for "failed to stop." This approach is designed to be robust against false positive wheel detections.| If the front wheel is not detected in both the *stopzone* and the *outzone*, the vehicle cannot be identified as "failed to stop." |
+
+### Stopped
+A vehicle is considered stopped if the speed of its center position is below 15 pixels/second while a wheel is in the *stopzone*.
+
+| False Positives                                                                                         | False Negatives                                                                                                    |
+|-----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| A false positive could occur if the vehicle is still moving but its center position movement is less than 15 pixels/second.| False negatives can occur if there is significant detection noise, preventing the speed threshold from being met. |
+
 
 ## 🚀 Future work
-**License plate recognition** With real-world data, future improvements could include adding license plate recognition. The input to such a model could be the detection coordinates of the vehicle and a cropped video segment containing only the vehicle that failed to stop.
+**License plate recognition:** With real-world data, future improvements could include adding license plate recognition. The input to such a model could be the detection coordinates of the vehicle and a cropped video segment containing only the vehicle that failed to stop.
 
 **Smoothing vehicle location:** Vehicle detections can be noisy, therefore the speed estimates will also be noisy. Techniques such as Kalman filtering or moving averages could be applied to smooth the vehicle's center position, thereby reducing noise in the speed calculations. This was a feature I was working on but a simple threshold seems to be enough.
 
