@@ -89,14 +89,14 @@ The vehicle moment is monitored as the difference in pixels of the vehicle cente
 
 <img src="readme_files/speed_plot.png" width="500"/>
 
-## 📊 Video Analysis
+## 📊 Video analysis
 To determine whether a vehicle has stopped correctly at the stop sign, the detection is reviewed during an analysis step.
 
-**Detection of a valid stop:**
+**Detection of a valid stop (label: stopped)**
 
 > *If the center position of the vehicle reaches a movement of less than 15 pixels per second and a wheel of the vehicle is within the stopzone.*
 
-**Detection of a failed stop:**
+**Detection of a failed stop (label: failed to stop)**
 
 > *If a wheel that was previously within the stopzone enters the outzone and the vehicle has not come to a complete stop during the time in the stopzone.*
 
@@ -108,19 +108,19 @@ Note that all vehicles evaluated for these criteria meet the initial requirement
 
 <img src="readme_files/stopping.gif" width="600"/>
 
-## 🛑 Method Limitations
+## 🛑 Method limitations
 
-### Failed to Stop
+### ➡ Failed to stop
 The first wheel to enter the *outzone* after being in the *stopzone* is identified as the front wheel. This wheel is used as the trigger for the "failed to stop" label. This approach aims to be robust against false positive wheel detections.
 
-| False Positives                                                                                               | False Negatives                                                                                       |
+| False positives                                                                                               | False negatives                                                                                       |
 |---------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
 | The first wheel to enter the *outzone* after being in the *stopzone* is identified as the front wheel. This wheel is used as the trigger for "failed to stop." This approach is designed to be robust against false positive wheel detections.| If the front wheel is not detected in both the *stopzone* and the *outzone*, the vehicle cannot be identified as "failed to stop." |
 
-### Stopped
+### ➡ Stopped
 A vehicle is considered stopped if the speed of its center position is below 15 pixels/second while a wheel is in the *stopzone*.
 
-| False Positives                                                                                         | False Negatives                                                                                                    |
+| False positives                                                                                         | False negatives                                                                                                    |
 |-----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
 | A false positive could occur if the vehicle is still moving but its center position movement is less than 15 pixels/second.| False negatives can occur if there is significant detection noise, preventing the speed threshold from being met. |
 
