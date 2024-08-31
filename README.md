@@ -48,7 +48,7 @@ One beautiful Swedish spring evening, I was enjoying a kebab outside [kronans ke
 Given that detecting cars has become quite straightforward with today's lightweight models, it occurred to me that implementing automatic stop sign detection using deep learning shouldn’t be too difficult.
 
 ## 🎥 Data
-To avoid filming individuals running stop signs and lacking access to advanced computer simulators, I decided to simulate traffic scenarios using my favorite game, GTA V. The game's realistic graphics and customizable camera angles made it an ideal choice for creating accurate simulations for this project.
+To avoid filming individuals running stop signs and lacking access to advanced computer simulators, I decided to simulate traffic scenarios using my favorite game, GTA V. The game's realistic graphics and customizable camera angles made it an ideal choice for creating accurate simulations for this project. Full dataset available [here](https://github.com/Leonnorblad/DetStopViolation/blob/main/StopSignViolation_videos.zip).
 
 ## 🧩 The solution
 
